@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.fabricmc.net/' } // Add Fabric Maven
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'minecraftpayment' // Match your archives_base_name
