@@ -11,14 +11,17 @@ function Message() {
     const [messageState, setState] = useState(-1)
 
     function sendMessage(){
-        const doc = document.getElementById("exampleInputEmail1")
+        const userNameDoc = document.getElementById("inputUserName")
+        const balanceDoc = document.getElementById("exampleInputEmail1")
         setState(0)
-        console.log(doc.value)
+        console.log(userNameDoc.value)
+        console.log(balanceDoc.value)
         axios({
             method: 'post',
-            url: 'http://localhost:8080/test/hello_world',
+            url: 'http://localhost:8080/api/v1/create_user',
             data: {
-                message: doc.value
+                username: userNameDoc.value,
+                balance: Number.parseInt(balanceDoc.value)
             }
         }).then( (response) => {
             console.log(response.data)
@@ -36,6 +39,10 @@ function Message() {
     return (
         <>
             <form>
+                <div className="mb-3">
+                    <label htmlFor="inputUserName" className="form-label">Send message to the server</label>
+                    <input type="text" className="form-control" id="inputUserName" aria-describedby="inputName"/>
+                </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Send message to the server</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
