@@ -3,8 +3,10 @@ package net.fiv.backend.model;
 import jakarta.persistence.*;
 
 import lombok.Getter;
+import lombok.Setter;
 
 
+@Setter
 @Getter
 @Entity
 @Table(name = "user_mini_wallet")
@@ -17,18 +19,6 @@ public class UsersMiniWallet {
     private String username;
 
     private long balance;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setBalance(long balance) {
-        this.balance = balance;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public UsersMiniWallet(String username, long balance) {
         this.username = username;

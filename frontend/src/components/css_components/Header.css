@@ -1,0 +1,15 @@
+#navigation {
+    margin: 0;
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    backdrop-filter: blur(8px);
+}
+
+.logo{
+    margin: 0 0 0 10%;
+    height: 10vh;
+
+}
