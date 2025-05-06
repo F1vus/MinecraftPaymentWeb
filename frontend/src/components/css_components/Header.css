@@ -8,8 +8,45 @@
     backdrop-filter: blur(8px);
 }
 
+#link-logo:hover {
+    background-color: transparent !important;
+}
+
+a{
+    color: white !important;
+    text-decoration: none;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+a:hover{
+    background-color: #7980fd;
+}
+
+.div-user-login-buttons{
+    margin-left: auto;
+    display: flex;
+    margin-right: 5%;
+    justify-content: center;
+    margin-top: 1.5%;
+}
+
+.a-signup{
+    padding: 20px;
+    background-color: #3939ff;
+    margin-right: auto;
+}
+
+.a-login{
+    padding: 20px;
+    background-color: #3939ff;
+    margin-left: 15%;
+}
+
 .logo{
     margin: 0 0 0 10%;
     height: 10vh;
 
 }
+
