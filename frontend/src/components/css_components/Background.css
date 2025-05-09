@@ -1,6 +1,6 @@
 .bg {
     position: relative;
-    background-image: url("../../../public/backgroud.jpg");
+    background-image: url("/backgroud.jpg");
     height: 100vh;
 
     background-attachment: fixed;
