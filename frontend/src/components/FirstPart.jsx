@@ -34,11 +34,14 @@ export default function FirstPart(){
         <Background>
             <main className="main-center">
                 <h1>MINECRAFT_SHOP.FIV</h1>
-                <p>Online on the server</p>
-                {serverStatus && <p id="p-online">
-                    <img className="green-point" src={point} alt="green point"/>
-                    {playerCount} from {maxPlayerCount} Players
-                </p>}
+                {serverStatus && <>
+                    <p>Online on the server</p>
+                    <p id="p-online">
+                        <img className="green-point" src={point} alt="green point"/>
+                        {playerCount} from {maxPlayerCount} Players
+                    </p>
+                </>
+                }
                 {serverStatus === false && <span>Server offline niestiety</span>}
                 <div className="div-button-shop">
                     <a className="a-button-shop" href="#shop">
