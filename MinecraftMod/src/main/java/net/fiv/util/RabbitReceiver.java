@@ -4,9 +4,13 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +31,14 @@ public class RabbitReceiver {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + message + "'");
+            World world = server.getWorld(World.OVERWORLD);
+            ServerPlayerEntity player =  server.getPlayerManager().getPlayer("Drago347890");
+            if(message.equalsIgnoreCase("lightning")) {
+                LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world); // Create the lightning bolt
+                lightning.setPosition(player.getPos()); // Set its position. This will make the lightning bolt strike the player (probably not what you want)
+                world.spawnEntity(lightning); // Spawn the lightning entity
+            }
+
             server.getPlayerManager().broadcast(Text.literal(message).formatted(Formatting.RED), false);
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });

@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1")
 public class FrontendController {
 
     @Autowired

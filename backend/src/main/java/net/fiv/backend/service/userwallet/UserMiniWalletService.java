@@ -17,8 +17,8 @@ public class UserMiniWalletService {
         this.walletDAO = walletDAO;
     }
 
-    public UsersMiniWallet saveWallet(UsersMiniWallet wallet) {
-        return walletDAO.save(wallet);
+    public void saveWallet(UsersMiniWallet wallet) {
+        walletDAO.save(wallet);
     }
 
     public Optional<UsersMiniWallet> findById(Integer id) {

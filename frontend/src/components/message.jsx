@@ -12,16 +12,16 @@ function Message() {
 
     function sendMessage(){
         const userNameDoc = document.getElementById("inputUserName")
-        const balanceDoc = document.getElementById("exampleInputEmail1")
+        //const balanceDoc = document.getElementById("exampleInputEmail1")
         setState(0)
         console.log(userNameDoc.value)
-        console.log(balanceDoc.value)
+        //console.log(balanceDoc.value)
         axios({
             method: 'post',
-            url: 'http://localhost:8080/api/v1/create_user',
+            url: 'http://localhost:8080/api/v1/hello_world',
             data: {
-                username: userNameDoc.value,
-                balance: Number.parseInt(balanceDoc.value)
+                message: userNameDoc.value,
+                //balance: Number.parseInt(balanceDoc.value)
             }
         }).then( (response) => {
             console.log(response.data)
@@ -42,10 +42,6 @@ function Message() {
                 <div className="mb-3">
                     <label htmlFor="inputUserName" className="form-label">Send message to the server</label>
                     <input type="text" className="form-control" id="inputUserName" aria-describedby="inputName"/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Send message to the server</label>
-                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                 </div>
 
                 <button type="button" className="btn btn-primary" onClick={sendMessage}>Submit</button>
