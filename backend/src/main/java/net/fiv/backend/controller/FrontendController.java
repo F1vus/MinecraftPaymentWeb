@@ -1,8 +1,6 @@
 package net.fiv.backend.controller;
 
-import net.fiv.backend.model.UsersMiniWallet;
 import net.fiv.backend.service.rabbitmq.MessageSender;
-import net.fiv.backend.service.userwallet.UserMiniWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ public class FrontendController {
     @Autowired
     private MessageSender messageSender;
 
-    @Autowired
-    private UserMiniWalletService walletService;
 
     @PostMapping("hello_world")
     public ResponseEntity<String> hello(@RequestBody HashMap<String, String> message){
@@ -30,12 +26,5 @@ public class FrontendController {
         return new ResponseEntity<>("Message delivered", HttpStatusCode.valueOf(200));
     }
 
-    @PostMapping("create_user")
-    public ResponseEntity<String> createWallet(@RequestBody UsersMiniWallet wallet) {
-        if(wallet.getUsername().isBlank() && wallet.getBalance() <=0){
-            return new ResponseEntity<>("Bad data", HttpStatusCode.valueOf(400));
-        }
-        walletService.saveWallet(wallet);
-        return new ResponseEntity<>("Message delivered", HttpStatusCode.valueOf(200));
-    }
+
 }

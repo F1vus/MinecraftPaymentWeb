@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface UserDAO extends JpaRepository<UsersMiniWallet, Long> {
 
     Optional<UsersMiniWallet> findByUsername(String username);
-
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 
 }
