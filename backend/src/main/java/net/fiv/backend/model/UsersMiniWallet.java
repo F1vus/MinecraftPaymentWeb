@@ -2,31 +2,24 @@ package net.fiv.backend.model;
 
 import jakarta.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 
-@Setter
-@Getter
+
 @Entity
-@Table(name = "user_mini_wallet")
+@Table(name="users")
+@Data
 public class UsersMiniWallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String username;
 
-    private long balance;
+    private String email;
 
-    public UsersMiniWallet(String username, long balance) {
-        this.username = username;
-        this.balance = balance;
-    }
+    private String password;
 
-
-    public UsersMiniWallet() {
-
-    }
+    private Long balance;
 }
