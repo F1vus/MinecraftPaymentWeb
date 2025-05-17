@@ -44,6 +44,10 @@ a:hover{
     margin-left: 15%;
 }
 
+.a-user{
+    background-color: #3939ff;
+}
+
 .logo{
     margin: 0 0 0 10%;
     height: 10vh;

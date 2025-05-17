@@ -1,13 +1,32 @@
 import Background from "../Background.jsx";
-import {Link} from "react-router-dom";
+import {Link, redirect} from "react-router-dom";
 import './LoginForm.css'
+import axios from "axios";
 
 export default function LoginForm(){
 
 
 
-    function sendLoginpRequest(){
-        //TODO
+    async function sendLoginpRequest(){
+        const usenameDoc = document.getElementById("username");
+        const passwordDoc = document.getElementById("password");
+
+        await axios({
+            method: 'post',
+            url: 'http://localhost:8080/auth/signin',
+            data: {
+                username: usenameDoc.value,
+                password: passwordDoc.value
+            }
+        }).then( (response) => {
+            console.log(response.data)
+            if(response.status === 200){
+                localStorage.setItem("token", response.data);
+                redirect("/");
+            }
+        }).catch((error) => {
+            console.log(error.data)
+        });
     }
 
     return (
@@ -19,11 +38,11 @@ export default function LoginForm(){
                     </div>
                     <form>
                         <div className="field">
-                            <input type="text" required/>
-                            <label>Email Address</label>
+                            <input id="username" type="text" required/>
+                            <label>Username</label>
                         </div>
                         <div className="field">
-                            <input type="password" required/>
+                            <input id="password" type="password" required/>
                             <label>Password</label>
                         </div>
                         <div className="content">
@@ -36,7 +55,7 @@ export default function LoginForm(){
                             </div>
                         </div>
                         <div className="field">
-                            <input type="button" onClick={sendLoginpRequest} value="Login"/>
+                            <input type="button" onClick={sendLoginpRequest} value="Signin"/>
                         </div>
                         <div className="signup-link">
                             Not a member? <Link to="/signup">Signup now</Link>

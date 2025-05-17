@@ -11,8 +11,13 @@ export default function FirstPart(){
     const [serverStatus, setServerStatus] = useState(false);
     const [maxPlayerCount, setMaxPlayerCount] = useState(0);
 
+
     useEffect(() => {
-        axios.get('https://api.mcsrvstat.us/3/mc.hypixel.net')
+        fetchInformationAboutServer()
+    }, []);
+
+    async function fetchInformationAboutServer(){
+        await axios.get('https://api.mcsrvstat.us/3/mc.hypixel.net')
             .then((response) => {
                 const data = response.data;
 
@@ -28,7 +33,7 @@ export default function FirstPart(){
                 console.log(error);
                 setServerStatus(false);
             });
-    }, []);
+    }
 
     return (
         <Background>
