@@ -1,6 +1,6 @@
 package net.fiv.backend.service.userService;
 
-import net.fiv.backend.model.UserDetailsImpl;
+import net.fiv.backend.service.impl.UserDetailsImpl;
 import net.fiv.backend.model.UsersMiniWallet;
 import net.fiv.backend.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;

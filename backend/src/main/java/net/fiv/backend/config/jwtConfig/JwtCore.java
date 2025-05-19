@@ -1,7 +1,7 @@
 package net.fiv.backend.config.jwtConfig;
 
 import io.jsonwebtoken.security.Keys;
-import net.fiv.backend.model.UserDetailsImpl;
+import net.fiv.backend.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,8 @@
-package net.fiv.backend.model;
+package net.fiv.backend.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.fiv.backend.model.UsersMiniWallet;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
