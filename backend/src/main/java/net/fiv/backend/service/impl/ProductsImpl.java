@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
 public class ProductsImpl implements ProductService {
 
+    @Autowired
     private ProductsDAO productsDAO;
 
     @Autowired
