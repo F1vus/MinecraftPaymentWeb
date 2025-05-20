@@ -17,7 +17,7 @@ public class ProductsTable {
 
     private String description;
 
-    private String urlImage;
+    private String urlimage;
 
     private Long price;
 

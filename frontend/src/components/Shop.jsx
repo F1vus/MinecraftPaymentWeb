@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function Shop(){
-    const [items, setItems] = useState();
 
-    async function fetchProducts(){
-        await axios({
+function Shop(){
+    const [items, setItems] = useState([]);
+
+
+    useEffect(()=>{
+        axios({
             method: "GET",
             url:"http://localhost:8080/api/v1/products"
         }).then((response) => {
@@ -13,16 +15,29 @@ function Shop(){
             console.log(data);
             setItems(data);
         })
-    }
-
-    useEffect(()=>{
-        fetchProducts();
     }, []);
 
     return (
-        <>
 
-        </>
+        <div className="container">
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+                {
+                    items.map((value) => (
+                        <div className="col">
+                            <div className="card h-100">
+                                <img src={value.urlimage} className="card-img-top" alt="..." width="15" height="200"/>
+                                <div className="card-body">
+                                    <h5 className="card-title">{value.title}</h5>
+                                    <p className="card-text">{value.description}</p>
+                                    <h5 className="card-title">Price: {value.price}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
     )
 }
 
