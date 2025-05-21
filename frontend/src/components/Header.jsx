@@ -14,6 +14,7 @@ function Header(){
 
     function logout(){
         localStorage.removeItem("token");
+        setToken(null);
     }
 
     return(

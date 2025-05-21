@@ -7,14 +7,17 @@ function Shop(){
 
 
     useEffect(()=>{
-        axios({
-            method: "GET",
-            url:"http://localhost:8080/api/v1/products"
-        }).then((response) => {
-            const data = response.data;
-            console.log(data);
-            setItems(data);
-        })
+
+            axios({
+                method: "GET",
+                url:"http://localhost:8080/api/v1/products"
+            }).then((response) => {
+                const data = response.data;
+                console.log(data);
+                setItems(data);
+            })
+
+
     }, []);
 
     return (

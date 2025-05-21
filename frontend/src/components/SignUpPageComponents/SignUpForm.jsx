@@ -1,10 +1,11 @@
 import Background from "../Background.jsx";
 import './SignUpForm.css'
 import axios from "axios";
-import { redirect } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function SignUpForm(){
 
+    const navigate = useNavigate();
 
     async function sendSignUpRequest(){
         const usernameDoc = document.getElementById("username");
@@ -22,7 +23,7 @@ export default function SignUpForm(){
         }).then( (response) => {
             console.log(response.data)
             if(response.status === 200){
-                redirect("/")
+                navigate("/")
             }
         }).catch((error) => {
             console.log(error.data)

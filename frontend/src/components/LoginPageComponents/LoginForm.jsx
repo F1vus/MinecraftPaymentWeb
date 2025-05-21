@@ -1,15 +1,17 @@
 import Background from "../Background.jsx";
-import {Link, redirect} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './LoginForm.css'
 import axios from "axios";
 
 export default function LoginForm(){
 
-
+    const navigate = useNavigate();
 
     async function sendLoginpRequest(){
         const usenameDoc = document.getElementById("username");
         const passwordDoc = document.getElementById("password");
+
+
 
         await axios({
             method: 'post',
@@ -22,7 +24,7 @@ export default function LoginForm(){
             console.log(response.data)
             if(response.status === 200){
                 localStorage.setItem("token", response.data);
-                redirect("/");
+                navigate("/");
             }
         }).catch((error) => {
             console.log(error.data)
