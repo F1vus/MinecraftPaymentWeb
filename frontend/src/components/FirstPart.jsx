@@ -38,7 +38,7 @@ export default function FirstPart(){
     return (
         <Background>
             <main className="main-center">
-                <h1>MINECRAFT_SHOP.FIV</h1>
+                <h1>SHOP_EXAMPLE</h1>
                 {serverStatus && <>
                     <p>Online on the server</p>
                     <p id="p-online">

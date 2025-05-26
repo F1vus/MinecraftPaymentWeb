@@ -16,11 +16,13 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class OpenController {
 
-    @Autowired
-    private MessageSender messageSender;
+    private final MessageSender messageSender;
+    private final ProductService productService;
 
-    @Autowired
-    private ProductService productService;
+    public OpenController(MessageSender messageSender, ProductService productService) {
+        this.messageSender = messageSender;
+        this.productService = productService;
+    }
 
     @GetMapping("products")
     public List<ProductsTable> findAllProducts() {

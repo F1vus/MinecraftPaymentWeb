@@ -21,8 +21,6 @@ function Shop(){
     }, []);
 
     return (
-
-        <div className="container">
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {
                     items.map((value) => (
@@ -39,7 +37,7 @@ function Shop(){
                     ))
                 }
             </div>
-        </div>
+
 
     )
 }

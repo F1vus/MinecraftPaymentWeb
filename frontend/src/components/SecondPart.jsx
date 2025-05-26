@@ -4,9 +4,12 @@ import Shop from "./Shop.jsx";
 export default function SecondPart(){
 
     return (
-        <div id="container" className='bg-sec'>'
-            <Shop/>
-        </div>
+        <section className="section section-md wow fadeIn">
+            <div className='container'>
+                <Shop/>
+            </div>
+        </section>
+
     )
 
 }
