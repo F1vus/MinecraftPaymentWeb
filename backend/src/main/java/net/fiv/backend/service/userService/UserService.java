@@ -3,7 +3,6 @@ package net.fiv.backend.service.userService;
 import net.fiv.backend.service.impl.UserDetailsImpl;
 import net.fiv.backend.model.UsersMiniWallet;
 import net.fiv.backend.repository.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,10 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
-    @Autowired
-    public void setUserDAO(UserDAO userDAO) {
+    public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 

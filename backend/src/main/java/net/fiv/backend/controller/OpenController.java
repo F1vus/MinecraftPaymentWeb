@@ -1,9 +1,8 @@
 package net.fiv.backend.controller;
 
-import net.fiv.backend.model.ProductsTable;
+import net.fiv.backend.model.Products;
 import net.fiv.backend.service.rabbitmq.MessageSender;
 import net.fiv.backend.service.userService.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class OpenController {
     }
 
     @GetMapping("products")
-    public List<ProductsTable> findAllProducts() {
+    public List<Products> findAllProducts() {
         return productService.findAllProducts();
     }
 

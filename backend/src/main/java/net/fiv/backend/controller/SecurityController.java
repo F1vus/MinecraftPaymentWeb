@@ -5,7 +5,6 @@ import net.fiv.backend.DTO.SignupRequest;
 import net.fiv.backend.config.jwtConfig.JwtCore;
 import net.fiv.backend.model.UsersMiniWallet;
 import net.fiv.backend.repository.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,29 +20,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("auth")
 public class SecurityController {
 
-    private UserDAO userDAO;
-    private PasswordEncoder passwordEncoder;
-    private AuthenticationManager authenticationManager;
-    private JwtCore jwtCore;
+    private final UserDAO userDAO;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtCore jwtCore;
 
-
-    @Autowired
-    public void setUserDAO(UserDAO userDAO) {
+    public SecurityController(UserDAO userDAO, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtCore jwtCore) {
         this.userDAO = userDAO;
-    }
-
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @Autowired
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-    }
-
-    @Autowired
-    public void setJwtCore(JwtCore jwtCore) {
         this.jwtCore = jwtCore;
     }
 
@@ -52,9 +37,7 @@ public class SecurityController {
 
         Authentication authentication;
         try{
-            System.out.println("signin");
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getUsername(), signinRequest.getPassword()));
-            System.out.println("signin");
         }catch (BadCredentialsException e){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

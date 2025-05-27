@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
-
 @Entity
 @Table(name="users")
 @Data
@@ -22,4 +21,8 @@ public class UsersMiniWallet {
     private String password;
 
     private Long balance;
+
+    public UsersMiniWallet() {
+
+    }
 }

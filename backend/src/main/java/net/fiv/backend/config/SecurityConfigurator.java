@@ -1,8 +1,6 @@
 package net.fiv.backend.config;
 
 import net.fiv.backend.config.jwtConfig.TokenFilter;
-import net.fiv.backend.service.userService.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -25,15 +23,9 @@ public class SecurityConfigurator {
 
     public TokenFilter tokenFilter;
 
-    private UserService userService;
-
-    public SecurityConfigurator() {}
-
-    @Autowired
-    public void setTokenFilter(TokenFilter tokenFilter) {
-        this.tokenFilter = tokenFilter;
+    public SecurityConfigurator(TokenFilter tokenFIlter) {
+        this.tokenFilter = tokenFIlter;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {

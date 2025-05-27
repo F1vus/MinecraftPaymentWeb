@@ -1,9 +1,8 @@
 package net.fiv.backend.service.impl;
 
-import net.fiv.backend.model.ProductsTable;
+import net.fiv.backend.model.Products;
 import net.fiv.backend.repository.ProductsDAO;
 import net.fiv.backend.service.userService.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,17 +11,15 @@ import java.util.List;
 
 public class ProductsImpl implements ProductService {
 
-    @Autowired
-    private ProductsDAO productsDAO;
+    private final ProductsDAO productsDAO;
 
-    @Autowired
-    public void setProductsDAO(ProductsDAO productsDAO) {
+    public ProductsImpl(ProductsDAO productsDAO) {
         this.productsDAO = productsDAO;
     }
 
     @Override
-    public List<ProductsTable> findAllProducts() {
-        List<ProductsTable> productsTables = productsDAO.findAll();
+    public List<Products> findAllProducts() {
+        List<Products> productsTables = productsDAO.findAll();
 
         return productsTables.isEmpty() ? null : productsTables;
     }
