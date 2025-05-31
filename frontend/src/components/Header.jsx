@@ -21,9 +21,6 @@ function Header(){
         <header id='navigation'>
             <div className='blure'></div>
             <Link id="link-logo" to="/"><img className='logo' src={logo} alt='minecraft logo'/></Link>
-            <div>
-                <p>Towary</p>
-            </div>
             {
                 token !== null ?
                     <div className="div-user-login-buttons">

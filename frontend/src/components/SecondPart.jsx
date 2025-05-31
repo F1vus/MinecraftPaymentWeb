@@ -5,7 +5,7 @@ export default function SecondPart(){
 
     return (
         <section className="section section-md wow fadeIn">
-            <div className='container'>
+            <div className='container' id="shop">
                 <Shop/>
             </div>
         </section>

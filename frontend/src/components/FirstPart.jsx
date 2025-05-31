@@ -49,7 +49,7 @@ export default function FirstPart(){
                 }
                 {serverStatus === false && <span>Server offline niestiety</span>}
                 <div className="div-button-shop">
-                    <a className="a-button-shop" href="#container">
+                    <a className="a-button-shop" href="#shop">
                         <img className="shop_car" src={shop_car} alt="green point" width="16" height="16"/>
                         To shop
                     </a>
