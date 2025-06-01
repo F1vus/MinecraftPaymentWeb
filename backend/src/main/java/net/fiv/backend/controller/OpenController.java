@@ -2,7 +2,7 @@ package net.fiv.backend.controller;
 
 import net.fiv.backend.model.Products;
 import net.fiv.backend.service.rabbitmq.MessageSender;
-import net.fiv.backend.service.userService.ProductService;
+import net.fiv.backend.service.userService.ProductsService;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +16,16 @@ import java.util.List;
 public class OpenController {
 
     private final MessageSender messageSender;
-    private final ProductService productService;
+    private final ProductsService productService;
 
-    public OpenController(MessageSender messageSender, ProductService productService) {
+    public OpenController(MessageSender messageSender, ProductsService productService) {
         this.messageSender = messageSender;
         this.productService = productService;
     }
 
     @GetMapping("products")
     public List<Products> findAllProducts() {
-        return productService.findAllProducts();
+        return productService.findAll();
     }
 
     @PostMapping("hello_world")

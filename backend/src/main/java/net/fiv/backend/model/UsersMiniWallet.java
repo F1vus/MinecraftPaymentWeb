@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.Data;
 
+import java.util.Set;
+
 
 @Entity
 @Table(name="users")
@@ -11,8 +13,11 @@ import lombok.Data;
 public class UsersMiniWallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Purchase> purchase;
 
     private String username;
 
@@ -21,6 +26,8 @@ public class UsersMiniWallet {
     private String password;
 
     private Long balance;
+
+
 
     public UsersMiniWallet() {
 

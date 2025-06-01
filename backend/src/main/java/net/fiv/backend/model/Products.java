@@ -9,7 +9,7 @@ import lombok.Data;
 public class Products {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String title;
@@ -21,7 +21,6 @@ public class Products {
     private String minecraftTag;
 
     private Long price;
-
 
     public Products() {
 
