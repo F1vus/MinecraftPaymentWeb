@@ -29,6 +29,7 @@ public class SecuredController {
     @PostMapping("add_product")
     public ResponseEntity<String> addProduct(@RequestBody AddProductRequest addProductRequest) {
         Products products = new Products();
+        System.out.println(addProductRequest.toString());
 
         products.setTitle(addProductRequest.getTitle());
         products.setDescription(addProductRequest.getDescription());

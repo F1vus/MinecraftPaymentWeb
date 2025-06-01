@@ -6,7 +6,7 @@ import lombok.Data;
 public class AddProductRequest {
     String title;
     String description;
-    String minecraft_tag;
+    String minecraftTag;
     Long price;
     String urlimage;
 }

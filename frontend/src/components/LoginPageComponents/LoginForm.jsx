@@ -45,7 +45,7 @@ export default function LoginForm(){
             url: 'http://localhost:8080/auth/signin',
             data: {
                 username: account.username,
-                password: errors.password
+                password: account.password
             }
         }).then( (response) => {
             console.log(response.data)

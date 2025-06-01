@@ -1,14 +1,15 @@
 import React from 'react';
+import AddProductForm from "../components/UserPageComponents/AddProduct.jsx";
 
 
-const Home = () => {
-
+const User = () => {
 
     return (
-        <>
-            <p>TEST PAGE</p>
-        </>
+        <div className="container mt-4">
+
+            <AddProductForm/>
+        </div>
     );
 };
 
-export default Home;
+export default User;
