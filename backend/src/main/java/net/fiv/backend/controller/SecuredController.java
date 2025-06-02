@@ -35,7 +35,7 @@ public class SecuredController {
         products.setDescription(addProductRequest.getDescription());
         products.setPrice(addProductRequest.getPrice());
         products.setUrlimage(addProductRequest.getUrlimage());
-        products.setMinecraftTag(addProductRequest.getMinecraft_tag());
+        products.setMinecraftTag(addProductRequest.getMinecraftTag());
 
         productsService.save(products);
         return ResponseEntity.ok("Product added");

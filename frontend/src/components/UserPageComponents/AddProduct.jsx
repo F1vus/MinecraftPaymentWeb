@@ -42,6 +42,7 @@ export default function AddProductForm(){
             ...prevProduct,
             [name]: value
         }));
+        console.log(product)
     };
 
     async function sendAddProductRequest(event){
@@ -56,7 +57,7 @@ export default function AddProductForm(){
             method: 'post',
             url: 'http://localhost:8080/secured/api/v1/add_product',
             headers: {
-                "Authorization" : 'Bearer '+localStorage.getItem("toen")
+                "Authorization" : 'Bearer '+localStorage.getItem("token")
             },
             data: {
                 title: product.title,
@@ -75,13 +76,13 @@ export default function AddProductForm(){
         }).catch((error) => {
             console.log(error.data)
             setErrors({
-                status: error.status
+                status: error.data
             });
         });
     }
 
     return (
-            <form onSubmit={sendAddProductRequest}>
+            <form onSubmit={sendAddProductRequest} className="form-control">
                 <div className="mb-3">
                     <label>Title</label>
                     <input
@@ -163,6 +164,16 @@ export default function AddProductForm(){
                     errors.price && (<div className="alert alert-danger">{errors.price} </div>)
                 }
                 <button type="submit" className="btn btn-primary">Submit</button>
+                {
+                    errors.status===200 &&(
+                        <div className="alert alert-success">Product added!</div>
+                    )
+                }
+                {
+                    errors.status !== 200 &&(
+                        <div className="alert alert-danger">{errors.status}</div>
+                    )
+                }
             </form>
     )
 }
