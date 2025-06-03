@@ -76,15 +76,16 @@ export default function AddProductForm(){
         }).catch((error) => {
             console.log(error.data)
             setErrors({
-                status: error.data
+                status: 400
             });
         });
     }
 
     return (
+        <>
             <form onSubmit={sendAddProductRequest} className="form-control">
                 <div className="mb-3">
-                    <label>Title</label>
+                    <label>Title(must be unique)</label>
                     <input
                         value={product.title}
                         name="title"
@@ -96,9 +97,6 @@ export default function AddProductForm(){
                         placeholder="title"
                     />
                 </div>
-                {
-                    errors.title && (<div className="alert alert-danger">{errors.title} </div>)
-                }
                 <div className="mb-3">
                     <label className="form-label">Description</label>
                     <textarea
@@ -112,9 +110,6 @@ export default function AddProductForm(){
                     >
                     </textarea>
                 </div>
-                {
-                    errors.description && (<div className="alert alert-danger">{errors.description} </div>)
-                }
                 <div className="mb-3">
                     <label>Url image</label>
                     <input
@@ -128,9 +123,6 @@ export default function AddProductForm(){
                         placeholder="url image"
                     />
                 </div>
-                {
-                    errors.urlimage && (<div className="alert alert-danger">{errors.urlimage} </div>)
-                }
                 <div className="mb-3">
                     <label>Minecraft Tag</label>
                     <input
@@ -144,9 +136,6 @@ export default function AddProductForm(){
                         placeholder="minecraft tag"
                     />
                 </div>
-                {
-                    errors.minecraftTag && (<div className="alert alert-danger">{errors.minecraftTag} </div>)
-                }
                 <div className="mb-3">
                     <label>Price</label>
                     <input
@@ -161,19 +150,23 @@ export default function AddProductForm(){
                     />
                 </div>
                 {
-                    errors.price && (<div className="alert alert-danger">{errors.price} </div>)
+                    (errors.price || errors.minecraftTag || errors.urlimage || errors.description ||  errors.title) && (
+                        <div className="alert alert-danger">Fields cant not be empty </div>
+                    )
                 }
                 <button type="submit" className="btn btn-primary">Submit</button>
                 {
-                    errors.status===200 &&(
+                    errors.status === 200 && (
                         <div className="alert alert-success">Product added!</div>
                     )
                 }
                 {
-                    errors.status !== 200 &&(
+                    errors.status === 400 && (
                         <div className="alert alert-danger">{errors.status}</div>
                     )
                 }
             </form>
+        </>
+
     )
 }
