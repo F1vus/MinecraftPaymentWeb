@@ -16,9 +16,6 @@ public class UsersMiniWallet {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Purchase> purchase;
-
     private String username;
 
     private String email;
@@ -27,7 +24,17 @@ public class UsersMiniWallet {
 
     private Long balance;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Purchase> purchase;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID") })
+    private Set<Role> roles;
 
     public UsersMiniWallet() {
 

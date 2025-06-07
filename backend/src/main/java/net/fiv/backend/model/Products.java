@@ -12,6 +12,8 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+
+    @Column(unique = true)
     private String title;
 
     private String description;

@@ -2,6 +2,7 @@ package net.fiv.backend.service.userService;
 
 import net.fiv.backend.model.Products;
 import net.fiv.backend.repository.ProductsDAO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class ProductsService {
     }
 
     public void save(Products products) {
+        try {
+            productsDAO.save(products);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("A product with this title already exists");
+        }
         productsDAO.save(products);
     }
 
