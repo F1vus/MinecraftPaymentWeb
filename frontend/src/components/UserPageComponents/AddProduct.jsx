@@ -74,9 +74,10 @@ export default function AddProductForm(){
                 });
             }
         }).catch((error) => {
-            console.log(error.data)
+            console.log(error)
             setErrors({
-                status: 400
+                status: 400,
+                message: error.response.data
             });
         });
     }
@@ -162,7 +163,7 @@ export default function AddProductForm(){
                 }
                 {
                     errors.status === 400 && (
-                        <div className="alert alert-danger">{errors.status}</div>
+                        <div className="alert alert-danger">{errors.message}</div>
                     )
                 }
             </form>
