@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductsDAO extends CrudRepository<Products, Long> {
+    Products findByTitle(String title);
+    void deleteByTitle(String productName);
 }

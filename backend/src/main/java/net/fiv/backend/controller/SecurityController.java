@@ -3,15 +3,14 @@ package net.fiv.backend.controller;
 import net.fiv.backend.DTO.SigninRequest;
 import net.fiv.backend.DTO.SignupRequest;
 import net.fiv.backend.config.jwtConfig.JwtCore;
-import net.fiv.backend.model.UsersMiniWallet;
+import net.fiv.backend.model.User;
 import net.fiv.backend.repository.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,15 +33,17 @@ public class SecurityController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody SigninRequest signinRequest) {
-
         Authentication authentication;
+
         try{
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getUsername(), signinRequest.getPassword()));
-        }catch (BadCredentialsException e){
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }catch (AuthenticationException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         String jwt = jwtCore.generateToken(authentication);
+
         return ResponseEntity.ok(jwt);
     }
 
@@ -55,7 +56,7 @@ public class SecurityController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email");
         }
 
-        UsersMiniWallet user = new UsersMiniWallet();
+        User user = new User();
         user.setUsername(signupRequest.getUsername());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
         user.setEmail(signupRequest.getEmail());

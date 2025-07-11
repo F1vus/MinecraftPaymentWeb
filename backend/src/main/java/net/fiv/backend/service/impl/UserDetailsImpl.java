@@ -2,12 +2,12 @@ package net.fiv.backend.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.fiv.backend.model.UsersMiniWallet;
-import org.springframework.security.core.GrantedAuthority;
+import net.fiv.backend.model.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -18,21 +18,28 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private Long balance;
+    private List<SimpleGrantedAuthority> authorities;
 
-    public static UserDetailsImpl build(UsersMiniWallet user) {
+    public static UserDetailsImpl build(User user) {
+        List<SimpleGrantedAuthority> authorities = user.getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getBalance()
+                user.getBalance(),
+                authorities
         );
     }
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     @Override

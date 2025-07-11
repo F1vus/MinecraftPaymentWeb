@@ -2,7 +2,7 @@ package net.fiv.backend.controller;
 
 import net.fiv.backend.DTO.AddProductRequest;
 import net.fiv.backend.model.Products;
-import net.fiv.backend.service.userService.ProductsService;
+import net.fiv.backend.service.impl.ProductsImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.security.Principal;
 @RequestMapping("secured/api/v1")
 public class SecuredController {
 
-    private final ProductsService productsService;
+    private final ProductsImpl productsImpl;
 
-    SecuredController(ProductsService productsService) {
-        this.productsService = productsService;
+    SecuredController(ProductsImpl productsImpl) {
+        this.productsImpl = productsImpl;
     }
 
     @GetMapping("user")
@@ -38,7 +38,7 @@ public class SecuredController {
         products.setUrlimage(addProductRequest.getUrlimage());
         products.setMinecraftTag(addProductRequest.getMinecraftTag());
         try{
-            productsService.save(products);
+            productsImpl.save(products);
         } catch (IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
