@@ -37,8 +37,11 @@ export default function SignUpForm(){
         event.preventDefault();
         const validationErrors = validate();
         setErrors(validationErrors || {});
-        showToast();
-        if (validationErrors) return;
+
+        if (validationErrors) {
+            showToast();
+            return
+        }
 
 
         await axios({

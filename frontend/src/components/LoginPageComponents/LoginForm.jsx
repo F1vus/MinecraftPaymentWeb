@@ -10,6 +10,8 @@ export default function LoginForm(){
 
     const navigate = useNavigate();
 
+    //const token = decodeToken(localStorage.getItem("token"));
+
     const [account, setAccount] = useState({
         username: "",
         password: ""
@@ -34,11 +36,11 @@ export default function LoginForm(){
         event.preventDefault();
 
         const errors = validate();
+
         setErrors(errors || {});
 
         showToast();
         if (errors) return;
-
 
         await axios({
             method: 'post',
@@ -54,7 +56,8 @@ export default function LoginForm(){
                 navigate("/");
             }
         }).catch((error) => {
-            console.log(error.data)
+            console.log(error.data);
+            errors.response = error;
         });
     }
 
@@ -73,7 +76,6 @@ export default function LoginForm(){
     };
 
 
-    console.log(errors)
     return (
         <>
             <Background>
