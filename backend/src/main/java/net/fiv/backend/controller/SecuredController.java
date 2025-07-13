@@ -1,8 +1,7 @@
 package net.fiv.backend.controller;
 
-import net.fiv.backend.DTO.AddProductRequest;
-import net.fiv.backend.model.Products;
-import net.fiv.backend.service.impl.ProductsImpl;
+import net.fiv.backend.DTO.ProductsDTO;
+import net.fiv.backend.service.impl.ProductsServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +12,9 @@ import java.security.Principal;
 @RequestMapping("secured/api/v1")
 public class SecuredController {
 
-    private final ProductsImpl productsImpl;
+    private final ProductsServiceImpl productsImpl;
 
-    SecuredController(ProductsImpl productsImpl) {
+    SecuredController(ProductsServiceImpl productsImpl) {
         this.productsImpl = productsImpl;
     }
 
@@ -28,17 +27,9 @@ public class SecuredController {
     }
 
     @PostMapping("add_product")
-    public ResponseEntity<String> addProduct(@RequestBody AddProductRequest addProductRequest) {
-        Products products = new Products();
-        System.out.println(addProductRequest.toString());
-
-        products.setTitle(addProductRequest.getTitle());
-        products.setDescription(addProductRequest.getDescription());
-        products.setPrice(addProductRequest.getPrice());
-        products.setUrlimage(addProductRequest.getUrlimage());
-        products.setMinecraftTag(addProductRequest.getMinecraftTag());
+    public ResponseEntity<String> addProduct(@RequestBody ProductsDTO addProductRequest) {
         try{
-            productsImpl.save(products);
+            productsImpl.createProduct(addProductRequest);
         } catch (IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -23,6 +23,7 @@ public class Products {
 
     private String urlimage;
 
+    @Column(unique = true)
     private String minecraftTag;
 
     private Long price;
