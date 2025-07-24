@@ -10,7 +10,7 @@ function Shop(){
 
             axios({
                 method: "GET",
-                url:"http://localhost:8080/api/v1/products"
+                url:"http://localhost:8080/api/open/products"
             }).then((response) => {
                 const data = response.data;
                 console.log(data);
@@ -26,7 +26,7 @@ function Shop(){
                     items.map((value) => (
                         <div className="col">
                             <div className="card h-100">
-                                <img src={value.urlimage} className="card-img-top" alt="..." width="200px" height="200px"/>
+                                <img src={value.image} className="card-img-top" alt="..." width="200px" height="200px"/>
                                 <div className="card-body">
                                     <h5 className="card-title">{value.title}</h5>
                                     <p className="card-text">{value.description}</p>

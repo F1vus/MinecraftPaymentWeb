@@ -46,7 +46,7 @@ export default function SignUpForm(){
 
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/auth/signup',
+            url: 'http://localhost:8080/api/auth/register',
             data: {
                 username: account.username,
                 email: account.email,

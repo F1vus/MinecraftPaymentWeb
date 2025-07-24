@@ -44,7 +44,7 @@ export default function LoginForm(){
 
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/auth/signin',
+            url: 'http://localhost:8080/api/auth/login',
             data: {
                 username: account.username,
                 password: account.password

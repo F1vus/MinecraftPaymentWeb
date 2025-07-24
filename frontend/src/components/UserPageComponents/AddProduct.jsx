@@ -55,22 +55,22 @@ export default function AddProductForm(){
 
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/secured/api/v1/add_product',
+            url: 'http://localhost:8080/api/secured/add_product',
             headers: {
                 "Authorization" : 'Bearer '+localStorage.getItem("token")
             },
             data: {
                 title: product.title,
                 description: product.description,
-                urlimage: product.urlimage,
+                image: product.urlimage,
                 minecraftTag: product.minecraftTag,
                 price: Number.parseInt(product.price),
             }
         }).then( (response) => {
             console.log(response.data)
-            if(response.status === 200){
+            if(response.status === 201){
                 setErrors({
-                    status: 200
+                    status: 201
                 });
             }
         }).catch((error) => {
@@ -157,7 +157,7 @@ export default function AddProductForm(){
                 }
                 <button type="submit" className="btn btn-primary">Submit</button>
                 {
-                    errors.status === 200 && (
+                    errors.status === 201 && (
                         <div className="alert alert-success">Product added!</div>
                     )
                 }
