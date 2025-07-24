@@ -6,25 +6,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="products")
+@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String title;
 
     private String description;
 
-    private String urlimage;
+    private String image;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String minecraftTag;
 
+    @Column(nullable = false)
     private Long price;
+
 }

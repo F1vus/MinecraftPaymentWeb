@@ -1,14 +1,12 @@
 package net.fiv.backend.service.service;
 
-import net.fiv.backend.DTO.SignupRequest;
-import net.fiv.backend.mapper.UserMapper;
+import net.fiv.backend.exception.AlreadyExistsException;
 import net.fiv.backend.service.impl.UserDetailsImpl;
 import net.fiv.backend.model.User;
 import net.fiv.backend.repository.UserDAO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserDetailsService {
 
     private final UserDAO userDAO;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserDAO userDAO, PasswordEncoder passwordEncoder) {
+    public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -32,17 +28,21 @@ public class UserService implements UserDetailsService {
         return UserDetailsImpl.build(user);
     }
 
-    public void register(SignupRequest request) {
-        if(userDAO.existsByUsername(request.getUsername())){
-            throw new RuntimeException("Username already exists");
+    @Transactional
+    public void register(User user) throws AlreadyExistsException {
+        if(userDAO.existsByUsername(user.getUsername())){
+            throw new AlreadyExistsException("Username already exists");
         }
-        if(userDAO.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exists");
+        if(userDAO.existsByEmail(user.getEmail())){
+            throw new AlreadyExistsException("Email already exists");
         }
 
-        User user = UserMapper.fromSignupRequest(request);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.save(user);
+    }
+
+    public User getUserByUsername(String username) {
+        return userDAO.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User %s not found", username)));
     }
 
 }

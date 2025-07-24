@@ -1,12 +1,11 @@
 package net.fiv.backend.repository;
 
-import net.fiv.backend.model.Products;
+import net.fiv.backend.model.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
-public interface ProductsDAO extends CrudRepository<Products, Long> {
-    Products findByTitle(String title);
-    void deleteByTitle(String productName);
+public interface ProductsDAO extends CrudRepository<Product, Long> {
 }

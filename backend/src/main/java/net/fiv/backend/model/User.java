@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -22,16 +21,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    @ColumnDefault("0")
     private Long balance;
 
     @OneToMany(mappedBy = "users")
-    private Set<Purchase> purchase;
+    private List<Purchase> purchaseList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_role",
@@ -41,8 +44,4 @@ public class User {
             inverseJoinColumns = {
                     @JoinColumn(name = "roles_id") })
     private Collection<Role> roles = new HashSet<>();
-
-    public Collection<Role> getRoles() {
-        return new HashSet<>(roles);
-    }
 }

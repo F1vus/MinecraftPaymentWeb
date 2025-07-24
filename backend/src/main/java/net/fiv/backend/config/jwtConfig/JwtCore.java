@@ -10,20 +10,24 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class JwtCore {
 
-    @Value("${backend.app.secret}")
-    private String secret;
+    private final String secret;
 
-    @Value("${backend.app.lifetime}")
-    private int lifetime;
+    private final int lifetime;
+
+    private final SecretKey secretKey;
+
+    public JwtCore(@Value("${backend.app.secret}") String secret, @Value("${backend.app.lifetime}") int lifetime) {
+        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.secret = secret;
+        this.lifetime = lifetime;
+    }
 
     public String generateToken(Authentication authentication) {
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -47,7 +51,6 @@ public class JwtCore {
 
 
     public Claims extractAllClaims(String token) {
-        SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes());
 
         return Jwts.parser()
                 .verifyWith(secretKey)
